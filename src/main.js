@@ -8,12 +8,25 @@ function getMarkupEstimation(inputBasePrice, inputPeople, inputCategory) {
 	// Get material markup percent
 	var materialMarkup = getMaterialMarkup(inputCategory);
 
-	return basePrice;
+	var markupEstimation;
+	var flatMarkup;
+	if (basePrice === 0) {
+		markupEstimation = 0;
+	} else {
+		flatMarkup = basePrice + (basePrice * 0.05);
+		markupEstimation = flatMarkup + (flatMarkup * materialMarkup) + (flatMarkup * people * 0.012);
+	}
+	markupEstimation = roundAndFormatEstimation(markupEstimation);
+	return markupEstimation;
 }
-	
+
+function roundAndFormatEstimation(price) {
+	 return '$' + price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+}
+
 function getMaterialMarkup(category) {
 	var materials = {
-		food: 0.013,
+		food: 0.13,
 		electronics: 0.02,
 		drugs: 0.075
 	};
@@ -38,7 +51,7 @@ function parseNumFromPeople(stringPeople) {
 	var units = ['people', 'person'];
 	var strToArr = stringPeople.split(' ');
 	
-	if ((strToArr.length === 2 && units.indexOf(strToArr[1]) === 0 )
+	if ((strToArr.length === 2 && units.indexOf(strToArr[1]) > -1 )
 			|| strToArr.length === 1) {
 		return peopleValueToInt(strToArr[0]);
 	} else {
@@ -75,11 +88,6 @@ function convertBasePrice(basePrice) {
 }
 
 function parseNumFromBasePrice(stringBasePrice) {
-	// Apply this logic later when all values converted
-	// Ensure number has proper cents value 
-	// if (stringBasePrice[stringBasePrice.length-3] !== '.') {
-	// 	throw new Error('Base Price must have proper cents value.');
-	// }
 	var basePrice = Number(stringBasePrice.replace(/[^0-9-\.]+/g,''));
 	// Ensure base price is a positive number
 	if (basePrice < 0 ) {

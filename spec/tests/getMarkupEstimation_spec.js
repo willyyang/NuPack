@@ -55,10 +55,25 @@ describe('Extract number of people', function() {
 // Get Material Markup
 describe('Get the material markup value', function() {
 	it('should return the correct material markup', function() {
-		expect(nupack.getMaterialMarkup('food')).toBe(0.013);
+		expect(nupack.getMaterialMarkup('food')).toBe(0.13);
 	});
 
 	it('should return 0 when there is no matching material markup', function() {
 		expect(nupack.getMaterialMarkup('random')).toBe(0);
+	});
+});
+
+// Get Markup Estimation
+describe('Markup Estimation for different jobs', function() {
+	it('should return the correct output for Example 1 from assignment', function() {
+		expect(nupack.getMarkupEstimation('$1,299.99', '3 people', 'food')).toBe('$1,591.58');
+	});
+
+	it('should return the correct output for Example 2 from assignment', function() {
+		expect(nupack.getMarkupEstimation('$5,432.00', '1 person', 'drugs')).toBe('$6,199.81');
+	});
+
+	it('should return the correct output for Example 2 from assignment', function() {
+		expect(nupack.getMarkupEstimation('$12,456.95', '4 people', 'books')).toBe('$13,707.63');
 	});
 });
