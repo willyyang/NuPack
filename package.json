@@ -1,0 +1,15 @@
+{
+  "name": "NuPack",
+  "version": "0.0.1",
+  "description": "Markup Calculator.",
+  "author": "Will Yang",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "jasmine",
+    "linter": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "3.8.1",
+    "jasmine": "2.5.2"
+  }
+}
