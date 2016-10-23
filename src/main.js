@@ -1,15 +1,11 @@
 function getMarkupEstimation(inputBasePrice, inputPeople, inputCategory) {
-	// Convert basePrice to number
 	var basePrice = convertBasePrice(inputBasePrice);
-
-	// Extract number of people
 	var people = extractNumOfPeople(inputPeople);
-	
-	// Get material markup percent
 	var materialMarkup = getMaterialMarkup(inputCategory);
 
 	var markupEstimation;
 	var flatMarkup;
+
 	if (basePrice === 0) {
 		markupEstimation = 0;
 	} else {
@@ -21,10 +17,12 @@ function getMarkupEstimation(inputBasePrice, inputPeople, inputCategory) {
 }
 
 function roundAndFormatEstimation(price) {
+	// Format and round price to output specification
 	return '$' + price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 }
 
 function getMaterialMarkup(category) {
+	// Get material markup percent
 	var materials = {
 		food: 0.13,
 		electronics: 0.02,
@@ -34,6 +32,7 @@ function getMaterialMarkup(category) {
 }
 
 function extractNumOfPeople(people) {
+	// Extract number of people
 	var numOfPeople;
 	if (typeof people === 'string') {
 		numOfPeople = parseNumFromPeople(people);
@@ -48,6 +47,7 @@ function extractNumOfPeople(people) {
 }
 
 function parseNumFromPeople(stringPeople) {
+	// Extract number from string form of people
 	var units = ['people', 'person'];
 	var strToArr = stringPeople.split(' ');
 	
@@ -64,6 +64,7 @@ function parseNumFromPeople(stringPeople) {
 }
 
 function peopleValueToInt(inputVal) {
+	// Convert string form of number to integer
 	if (((inputVal | 0) > 0 && inputVal % 1 == 0) || 0) {
 		return parseInt(inputVal);
 	} else {
@@ -74,6 +75,7 @@ function peopleValueToInt(inputVal) {
 }
 
 function convertBasePrice(basePrice) {
+	// Convert basePrice to number
 	var price;
 	if (typeof basePrice === 'string') {
 		price = parseNumFromBasePrice(basePrice);
@@ -88,8 +90,8 @@ function convertBasePrice(basePrice) {
 }
 
 function parseNumFromBasePrice(stringBasePrice) {
+	// Extract number from string form of base price
 	var basePrice = Number(stringBasePrice.replace(/[^0-9-\.]+/g,''));
-	// Ensure base price is a positive number
 	if (basePrice < 0 ) {
 		throw new Error('Base Price must be a positive number.');
 	}
