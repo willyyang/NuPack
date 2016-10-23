@@ -1,17 +1,17 @@
-# NuPack
+# NuPack- Nulogy Assignment
 
-# Node
+## Node
 v6.3.1
 
-# npm
+## npm
 v3.10.3
 
-# Install Dependencies
+## Install Dependencies
 ```bash
 npm install
 ```
 
-# Run Test Suite
+## Run Test Suite
 ```bash
 npm run test
 ```
