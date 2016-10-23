@@ -5,7 +5,19 @@ function getMarkupEstimation(inputBasePrice, inputPeople, inputCategory) {
 	// Extract number of people
 	var people = extractNumOfPeople(inputPeople);
 	
+	// Get material markup percent
+	var materialMarkup = getMaterialMarkup(inputCategory);
+
 	return basePrice;
+}
+	
+function getMaterialMarkup(category) {
+	var materials = {
+		food: 0.013,
+		electronics: 0.02,
+		drugs: 0.075
+	};
+	return materials[category] || 0;
 }
 
 function extractNumOfPeople(people) {
@@ -76,7 +88,7 @@ function parseNumFromBasePrice(stringBasePrice) {
 	return basePrice;
 }
 
-
 exports.getMarkupEstimation = getMarkupEstimation;
 exports.convertBasePrice =  convertBasePrice;
 exports.extractNumOfPeople = extractNumOfPeople;
+exports.getMaterialMarkup = getMaterialMarkup;

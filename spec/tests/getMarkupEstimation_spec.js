@@ -51,3 +51,14 @@ describe('Extract number of people', function() {
 		}).toThrow();
 	});
 });
+
+// Get Material Markup
+describe('Get the material markup value', function() {
+	it('should return the correct material markup', function() {
+		expect(nupack.getMaterialMarkup('food')).toBe(0.013);
+	});
+
+	it('should return 0 when there is no matching material markup', function() {
+		expect(nupack.getMaterialMarkup('random')).toBe(0);
+	});
+});
